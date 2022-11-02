@@ -8,16 +8,27 @@ function Videogames() {
   let dispatch = useDispatch();
   let state = useSelector(state => state.videogames);
 
-  // ! CREAMOS ESTADO COPIA PAGINADO
-  let itemsPage = 15;
+  // estados paginado
   const [datos, setDatos] = useState([])
   const [currentPage, setCurrentPage] = useState(0)
+
+  // estado vistas filtro ordenamiento
+  const [vista, setVista] = useState({
+    asc: false,
+    desc: false,
+    mayor: false,
+    menor: false
+  })
 
   // cuando se carga el componente despacha la accion y llena el state con todos los datos
   useEffect(() => {
     dispatch(getVideogame());
   }, [dispatch])
 
+
+  // ! CREAMOS PAGINADO
+  let itemsPage = 15;
+  
   // cuando se llenan todos los datos en el state, llenamos datos
   useEffect(() => {
     if (state.length === 1) {
@@ -25,7 +36,7 @@ function Videogames() {
     } else {
       setDatos([...state].splice(0, 15))
     }
-  }, [state])
+  }, [state, vista])
   
   // nextpage
   const next = () => {
@@ -45,7 +56,75 @@ function Videogames() {
     setDatos([...state].splice(index, itemsPage));
     setCurrentPage(prevPage);
   }
-  
+
+  // ! CREANDO FILTROS DE ORDENAMIENTO ASC - DESC
+  const selectSort = (e) => {
+    switch (e.target.value) {
+      case 'asc':
+        setDatos(state.sort((a, b) => {
+          setVista({
+            asc: true,
+            desc: false,
+            mayor: false,
+            menor: false
+          })
+          setCurrentPage(0)
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        }))
+        break;
+      case 'desc':
+        setDatos(state.sort((a, b) => {
+          setVista({
+            asc: false,
+            desc: true,
+            mayor: false,
+            menor: false
+          })
+          setCurrentPage(0)
+          if (a.name > b.name) {
+            return -1;
+          }
+          if (a.name < b.name) {
+            return 1;
+          }
+          return 0;
+        }))
+        break;
+      case 'mayor':
+        setDatos(state.sort((a, b) => {
+          setVista({
+            asc: false,
+            desc: false,
+            mayor: true,
+            menor: false
+          })
+          setCurrentPage(0)
+          return b.rating - a.rating
+        }))
+        break;
+      case 'menor':
+        setDatos(state.sort((a, b) => {
+          setVista({
+            asc: false,
+            desc: false,
+            mayor: false,
+            menor: true
+          })
+          setCurrentPage(0)
+          return a.rating - b.rating
+        }))
+        break;
+      default:
+        break;
+    }
+  }
+
   console.log(datos)
 
   return (
@@ -54,11 +133,17 @@ function Videogames() {
         <div className="container-options-videogames">
           <div className="btn-page-videogames">
             <Btn onClick={next} name={"Next"} />
-            <label>Page: {currentPage}</label>
+            <label>Page: {currentPage + 1}</label>
             <Btn onClick={prev} name={"Prev"} />
           </div>
           <div className="options-filter-videogames">
-
+            <select onChange={selectSort}>
+              <option value="#">Seleccione filtro</option>
+              <option value="asc">Ascendente</option>
+              <option value="desc">Descendente</option>
+              <option value="mayor">Mayor Puntaje</option>
+              <option value="menor">Menor Puntaje</option>
+            </select>
           </div>
         </div>
 
