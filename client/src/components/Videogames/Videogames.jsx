@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import { getVideogame } from '../../redux/actions';
+import { getVideogame, getGenres } from '../../redux/actions';
 import Videogame from './Videogame';
 import Btn from '../Buttons/Btn';
 
 function Videogames() {
   let dispatch = useDispatch();
   let state = useSelector(state => state.videogames);
+  let state2 = useSelector(state => state.genres);
 
   // estados paginado
   const [datos, setDatos] = useState([])
@@ -23,6 +24,9 @@ function Videogames() {
   // cuando se carga el componente despacha la accion y llena el state con todos los datos
   useEffect(() => {
     dispatch(getVideogame());
+  }, [dispatch])
+  useEffect(() => {
+    dispatch(getGenres())
   }, [dispatch])
 
 
@@ -125,7 +129,7 @@ function Videogames() {
     }
   }
 
-  console.log(datos)
+  console.log(state2)
 
   return (
     <div className='container-videogames'>

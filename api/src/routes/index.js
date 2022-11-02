@@ -101,8 +101,15 @@ router.get('/genres', async (req, res) => {
       }
       return obj;
     });
-    const createGenre = await Genre.bulkCreate(formatGenres)
-    res.status(200).send(createGenre);
+
+    const existGenres = await Genre.findAll();
+
+    if (!existGenres.length) {
+      const createGenre = await Genre.bulkCreate(formatGenres)
+      res.status(200).send(createGenre);
+    } else {
+      res.status(200).send(existGenres)
+    }
   } catch (error) {
     res.status(400).send(error.message);
   }
