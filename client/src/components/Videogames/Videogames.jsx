@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { getVideogame } from '../../redux/actions';
 import Videogame from './Videogame';
+import Btn from '../Buttons/Btn';
 
 function Videogames() {
   let dispatch = useDispatch();
@@ -51,8 +52,8 @@ function Videogames() {
     <div className='container-videogames'>
       <div className="container-interno-videogames">
         <div className="container-options-videogames">
-          <button onClick={prev}>prev</button>
-          <button onClick={next}>next</button>
+          <Btn onClick={next} name={"Next"} />
+          <Btn onClick={prev} name={"Prev"} />
         </div>
 
         <div className="container-info-videogames">
