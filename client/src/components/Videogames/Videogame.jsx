@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Videogame({ name, image }) {
+function Videogame({ name, genre, image }) {
   return (
     <div className='container-videogame'>
       <div className="container-img-videogame">
@@ -9,7 +9,7 @@ function Videogame({ name, image }) {
       <div className="container-info-videogame">
         <h1>{name}</h1>
         <div className="container-genre-videogame">
-          <label>{}</label>
+          <label>{genre}</label>
         </div>
       </div>
     </div>

@@ -30,7 +30,8 @@ router.get('/videogames', async (req, res) => {
           release: e.released,
           rating: e.rating,
           platform: e.platforms.map(e => e.platform.name),
-          image: e.background_image
+          image: e.background_image,
+          genre: e.genres.map(e => e.name)
         }
         return obj;
       });
@@ -48,7 +49,8 @@ router.get('/videogames', async (req, res) => {
           release: e.released,
           rating: e.rating,
           platform: e.platforms.map(e => e.platform.name),
-          image: e.background_image
+          image: e.background_image,
+          genre: e.genres.map(e => e.name)
         }
         return obj;
       });

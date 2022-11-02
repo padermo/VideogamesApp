@@ -14,8 +14,17 @@ function Videogames() {
   console.log(state)
 
   return (
-    <div>
-
+    <div className='container-videogames'>
+      <div className="container-interno-videogames">
+        {
+          state.length ?
+            state.map(e => (
+              <Videogame name={e.name} genre={e.genre} image={e.image} />
+            ))
+            :
+            ""
+        }
+      </div>
     </div>
   )
 }
