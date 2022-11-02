@@ -129,7 +129,18 @@ function Videogames() {
     }
   }
 
-  console.log(state2)
+  // ! CREANDO FILTRO POR GENERO
+  const selectGenre = (e) => {
+    let arreglo = []
+    for (let i = 0; i <= state.length; i++){
+      if (state[i]?.genre.includes(e.target.value)) {
+        arreglo.push(state[i])
+      }
+    }
+    setDatos(arreglo);
+  }
+
+  console.log(datos);
 
   return (
     <div className='container-videogames'>
@@ -148,6 +159,17 @@ function Videogames() {
               <option value="mayor">Mayor Puntaje</option>
               <option value="menor">Menor Puntaje</option>
             </select>
+
+            <select onChange={selectGenre}>
+              <option defaultValue="#">Seleccione genero</option>
+              {
+                state2.length ?
+                  state2.map(e => (
+                    <option value={e.name} key={e.id}>{e.name}</option>
+                  ))
+                  : ""
+              }
+            </select>
           </div>
         </div>
 
@@ -155,7 +177,7 @@ function Videogames() {
           {
             datos.length ?
               datos.map(e => (
-                <Videogame name={e.name} genre={e.genre} image={e.image} />
+                <Videogame name={e.name} genre={e.genre} image={e.image} key={e.id} />
               ))
               :
               "Cargando datos"
