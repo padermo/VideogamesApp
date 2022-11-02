@@ -52,8 +52,14 @@ function Videogames() {
     <div className='container-videogames'>
       <div className="container-interno-videogames">
         <div className="container-options-videogames">
-          <Btn onClick={next} name={"Next"} />
-          <Btn onClick={prev} name={"Prev"} />
+          <div className="btn-page-videogames">
+            <Btn onClick={next} name={"Next"} />
+            <label>Page: {currentPage}</label>
+            <Btn onClick={prev} name={"Prev"} />
+          </div>
+          <div className="options-filter-videogames">
+
+          </div>
         </div>
 
         <div className="container-info-videogames">
