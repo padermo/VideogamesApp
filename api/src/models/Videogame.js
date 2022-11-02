@@ -20,7 +20,14 @@ module.exports = (sequelize) => {
     release: {
       type: DataTypes.STRING,
     },
+    rating:{
+      type: DataTypes.STRING,
+    },
     platform: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    image: {
       type: DataTypes.STRING,
       allowNull: false,
     }
