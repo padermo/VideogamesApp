@@ -37,7 +37,9 @@ router.get('/videogames', async (req, res) => {
       });
 
       if (!formatData) throw new Error('Games not found');
-      res.status(200).send(formatData)
+      const dataDB = await Videogame.findAll();
+      const dataSend = formatData.concat(dataDB)
+      res.status(200).send(dataSend)
     } else {
       let id = 1;
       let datos = await axios.get(`${url}?search=${search}&key=${key}`)
@@ -56,7 +58,9 @@ router.get('/videogames', async (req, res) => {
       });
 
       if (!formatData) throw new Error('Games not found');
-      res.status(200).send(formatData)
+      const dataDB = await Videogame.findAll();
+      const dataSend = formatData.concat(dataDB)
+      res.status(200).send(dataSend)
     }
   } catch (error) {
     res.status(400).send(error.message)
