@@ -37,12 +37,13 @@ router.get('/videogames', async (req, res) => {
       });
 
       if (!formatData) throw new Error('Games not found');
-      const dataDB = await Videogame.findAll();
+      const dataDB = await Videogame.findAll({include: [{model: Genre}]});
       const dataSend = formatData.concat(dataDB)
       res.status(200).send(dataSend)
     } else {
       let id = 1;
       let datos = await axios.get(`${url}?search=${search}&key=${key}`)
+
       let formatData = datos.data.results.map(e => {
         let obj = {
           id: id++,
@@ -58,7 +59,7 @@ router.get('/videogames', async (req, res) => {
       });
 
       if (!formatData) throw new Error('Games not found');
-      const dataDB = await Videogame.findAll();
+      const dataDB = await Videogame.findAll({include: [{model: Genre}]});
       const dataSend = formatData.concat(dataDB)
       res.status(200).send(dataSend)
     }
@@ -123,14 +124,14 @@ router.get('/genres', async (req, res) => {
 // TODO: --------------------- / POST - VIDEOGAME / ----------------------------
 // creamos juegos en la db
 router.post('/videogame', async (req, res) => {
-  const { id, name, description, release, rating, platform, image, genreId } = req.body;
+  const { name, description, release, rating, platform, image, genreId } = req.body;
   try {
     let existGenre = await Videogame.findOne({ where: { name } });
     
-    if (!id || !name || !description || !platform || !genreId) throw new Error("Missing data")
+    if (!name || !description || !platform || !genreId.length) throw new Error("Missing data")
 
     if (!existGenre) {
-      const createGame = await Videogame.create({ id, name, description, release, rating, platform, image });
+      const createGame = await Videogame.create({ name, description, release, rating, platform, image });
       await createGame.addGenres(genreId);
       res.status(200).send(createGame);
     } else {

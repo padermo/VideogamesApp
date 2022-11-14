@@ -8,6 +8,8 @@ function Videogames() {
   let dispatch = useDispatch();
   let state = useSelector(state => state.videogames);
   let state2 = useSelector(state => state.genres);
+  let state3 = useSelector(state => state.videogame);
+
 
   // estados paginado
   const [datos, setDatos] = useState([])
@@ -25,40 +27,85 @@ function Videogames() {
   useEffect(() => {
     dispatch(getVideogame());
   }, [dispatch])
+
   useEffect(() => {
     dispatch(getGenres())
   }, [dispatch])
 
-
+  
   // ! CREAMOS PAGINADO
   let itemsPage = 15;
   
   // cuando se llenan todos los datos en el state, llenamos datos
   useEffect(() => {
-    if (state.length === 1) {
-      setDatos([...state])
+    if (state3.length) {
+      setDatos([...state3].splice(0, 15))
     } else {
       setDatos([...state].splice(0, 15))
     }
-  }, [state, vista])
+  }, [state, state3, vista])
   
   // nextpage
   const next = () => {
-    const totalElements = state.length;
-    const nextPage = currentPage + 1;
-    const index = nextPage * itemsPage;
-    if (index >= totalElements) return;
-    setDatos([...state].splice(index, itemsPage));
-    setCurrentPage(nextPage)
+    if (state3.length) {
+      const totalElements = state3.length;
+      const nextPage = currentPage + 1;
+      const index = nextPage * itemsPage;
+      if (index >= totalElements) return;
+      setDatos([...state3].splice(index, itemsPage));
+      setCurrentPage(nextPage)
+    }
+
+    else if (state.length) {
+      const totalElements = state.length;
+      const nextPage = currentPage + 1;
+      const index = nextPage * itemsPage;
+      if (index >= totalElements) return;
+      setDatos([...state].splice(index, itemsPage));
+      setCurrentPage(nextPage)
+    }
   }
 
   // prevpage
   const prev = () => {
-    const prevPage = currentPage - 1;
-    if (prevPage < 0) return;
-    const index = prevPage * itemsPage;
-    setDatos([...state].splice(index, itemsPage));
-    setCurrentPage(prevPage);
+    if (state3.length) {
+      const prevPage = currentPage - 1;
+      if (prevPage < 0) return;
+      const index = prevPage * itemsPage;
+      setDatos([...state3].splice(index, itemsPage));
+      setCurrentPage(prevPage);
+    }
+
+    else if (state.length) {
+      const prevPage = currentPage - 1;
+      if (prevPage < 0) return;
+      const index = prevPage * itemsPage;
+      setDatos([...state].splice(index, itemsPage));
+      setCurrentPage(prevPage);
+    }
+  }
+
+  // ! CREANDO FILTRO POR EXISTENCIAS EN BD O API
+  const selectContent = (e) => {
+    if (e.target.value === "api") {
+      let arreglo = [];
+      state.map(j => {
+        if (typeof(j.id) === 'number') {
+          arreglo.push(j)
+        }
+      })
+      setDatos(arreglo)
+    }
+
+    else if (e.target.value === "db") {
+      let arreglo = [];
+      state.map(j => {
+        if (typeof (j.id) === 'string') {
+          arreglo.push(j)
+        }
+      })
+      setDatos(arreglo)
+    }
   }
 
   // ! CREANDO FILTROS DE ORDENAMIENTO ASC - DESC
@@ -131,16 +178,16 @@ function Videogames() {
 
   // ! CREANDO FILTRO POR GENERO
   const selectGenre = (e) => {
-    let arreglo = []
+    let arreglo = [];
     for (let i = 0; i <= state.length; i++){
-      if (state[i]?.genre.includes(e.target.value)) {
+      if (state[i]?.genre?.includes(e.target.value)) {
         arreglo.push(state[i])
       }
     }
     setDatos(arreglo);
   }
 
-  console.log(datos);
+  
 
   return (
     <div className='container-videogames'>
@@ -164,11 +211,21 @@ function Videogames() {
               <option defaultValue="#">Seleccione genero</option>
               {
                 state2.length ?
-                  state2.map(e => (
+                  state2.sort((a, b) => {
+                  if (a.name < b.name) return -1
+                  if (a.name > b.name) return 1
+                  return 0
+                }).map(e => (
                     <option value={e.name} key={e.id}>{e.name}</option>
                   ))
                   : ""
               }
+            </select>
+
+            <select onChange={selectContent}>
+              <option value="#">Seleccione datos</option>
+              <option value="api">Datos API</option>
+              <option value="db">Datos DB</option>
             </select>
           </div>
         </div>

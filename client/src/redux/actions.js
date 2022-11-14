@@ -2,11 +2,19 @@ import axios from 'axios';
 
 export const GET_VIDEOGAME = 'GET_VIDEOGAME';
 export const GET_GENRES = 'GET_GENRES';
+export const SEARCH_VIDEOGAME = 'SEARCH_VIDEOGAME';
 
 export const getVideogame = () => {
   return async (dispatch) => {
     let pedido = await axios.get('http://localhost:3001/videogames')
     dispatch({ type: GET_VIDEOGAME, payload: pedido.data });
+  }
+}
+
+export const searchVideogame = (value) => {
+  return async (dispatch) => {
+    let pedido = await axios.get(`http://localhost:3001/videogames?search=${value}`)
+    dispatch({ type: SEARCH_VIDEOGAME, payload: pedido.data });
   }
 }
 
