@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { getVideogame, getGenres } from '../../redux/actions';
+import { Link } from 'react-router-dom';
 import Videogame from './Videogame';
 import Btn from '../Buttons/Btn';
 
@@ -236,7 +237,9 @@ function Videogames() {
           {
             datos.length ?
               datos.map(e => (
-                <Videogame name={e.name} genre={e.genre} image={e.image} key={e.id} />
+                <Link to={`/detail/${e.id}`} key={e.id}>
+                  <Videogame name={e.name} genre={e.genre} image={e.image} />
+                </Link>
               ))
               :
               "Cargando datos"

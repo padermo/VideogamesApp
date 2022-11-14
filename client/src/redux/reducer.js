@@ -1,9 +1,10 @@
-import { GET_VIDEOGAME, GET_GENRES, SEARCH_VIDEOGAME } from "./actions";
+import { GET_VIDEOGAME, GET_GENRES, SEARCH_VIDEOGAME, GET_DETAIL } from "./actions";
 
 const initialState = {
   videogames: [],
   videogame: [],
   genres: [],
+  detail: []
 }
 
 export default function reducer(state = initialState, action) {
@@ -22,6 +23,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         videogame: action.payload
+      }
+    case GET_DETAIL:
+      return {
+        ...state,
+        detail: action.payload
       }
     default:
       return state;
