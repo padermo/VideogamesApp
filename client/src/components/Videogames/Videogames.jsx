@@ -33,7 +33,7 @@ function Videogames() {
   }, [dispatch])
 
   
-  // ! CREAMOS PAGINADO
+  // TODO! CREAMOS PAGINADO
   let itemsPage = 15;
   
   // cuando se llenan todos los datos en el state, llenamos datos
@@ -85,7 +85,7 @@ function Videogames() {
     }
   }
 
-  // ! CREANDO FILTRO POR EXISTENCIAS EN BD O API
+  // TODO! CREANDO FILTRO POR EXISTENCIAS EN BD O API
   const selectContent = (e) => {
     if (e.target.value === "api") {
       let arreglo = [];
@@ -93,8 +93,9 @@ function Videogames() {
         if (typeof(j.id) === 'number') {
           arreglo.push(j)
         }
+        return j
       })
-      setDatos(arreglo)
+      setDatos([...arreglo].slice(0, 15))
     }
 
     else if (e.target.value === "db") {
@@ -103,8 +104,9 @@ function Videogames() {
         if (typeof (j.id) === 'string') {
           arreglo.push(j)
         }
+        return j
       })
-      setDatos(arreglo)
+      setDatos([...arreglo].slice(0, 15))
     }
   }
 
