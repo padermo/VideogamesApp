@@ -11,7 +11,7 @@ function Home() {
       <Header/>
       <Route exact path={'/'} render={() => <Videogames />} />
       <Route exact path={'/create-videogames'} render={() => <CreateVideogames />} />
-      <Route exact path={'/detail/:id'} render={()=> <Details />} />
+      <Route exact path={'/detail/:id'} render={({match})=> <Details match={match}/>} />
     </div>
   )
 }

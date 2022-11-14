@@ -20,11 +20,10 @@ router.get('/videogames', async (req, res) => {
   const { search } = req.query;
   try {
     if (!search) {
-      let id = 1;
       let datos = await axios.get(`${url}?key=${key}`)
       let formatData = datos.data.results.map(e => {
         let obj = {
-          id: id++,
+          id: Number(e.id),
           name: e.name,
           description: e.description ? e.description : "No description",
           release: e.released,
@@ -41,12 +40,10 @@ router.get('/videogames', async (req, res) => {
       const dataSend = formatData.concat(dataDB)
       res.status(200).send(dataSend)
     } else {
-      let id = 1;
       let datos = await axios.get(`${url}?search=${search}&key=${key}`)
-
       let formatData = datos.data.results.map(e => {
         let obj = {
-          id: id++,
+          id: Number(e.id),
           name: e.name,
           description: e.description ? e.description : "No description",
           release: e.released,
