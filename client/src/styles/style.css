@@ -1,3 +1,142 @@
 :root{
-  
+  --font: 'Sono', sans-serif; /*300 - 500 - 700*/
 }
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ----------------/ BUTTONS /---------------- */
+/* ------------------------------------------- */
+
+
+/* ----------------/ CREATE /----------------- */
+/* ------------------------------------------- */
+
+
+/* ----------------/ DETAIL /----------------- */
+/* ------------------------------------------- */
+
+
+/* ----------------/ FOOTER /----------------- */
+/* ------------------------------------------- */
+
+
+/* ----------------/ HEADER /----------------- */
+.container-header{
+  background-color: greenyellow;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50vh;
+}
+.container-interno-header{
+  background-color: rgb(198, 255, 112);
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 1200px;
+}
+.header-img{
+  background-color: rgb(120, 190, 15);
+  width: 1200px;
+  height: 250px;
+}
+.container-header-navbar{
+  background-color: rgb(109, 168, 21);
+  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1200px;
+  height: 60px;
+}
+/* ------------------------------------------- */
+
+
+/* -----------------/ HOME /------------------ */
+/* ------------------------------------------- */
+
+
+/* ----------------/ LANDING /---------------- */
+/* ------------------------------------------- */
+
+
+/* ----------------/ NAVBAR /----------------- */
+.container-navbar{
+  border: 1px solid purple;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.links-menu{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.links{
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+.lbl{
+  cursor: pointer;
+}
+.container-interno-navbar{
+  border: 1px solid yellow;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  height: 100%;
+  width: 1200px;
+}
+
+
+.container-searchbar{
+
+}
+.border-searchbar{
+  padding: 1px;
+  border: 1px solid black;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+}
+.input-search{
+  width: 150px;
+  height: 25px;
+  padding: 0 5px;
+  outline: none;
+  border: transparent;
+  border-radius: 25px 0 0 25px;
+  -webkit-border-radius: 25px 0 0 25px;
+  -moz-border-radius: 25px 0 0 25px;
+  -ms-border-radius: 25px 0 0 25px;
+  -o-border-radius: 25px 0 0 25px;
+}
+.btn-search{
+  cursor: pointer;
+  width: 60px;
+  height: 25px;
+  border: transparent;
+  padding: 0 5px;
+  border-radius: 0 25px 25px 0;
+  -webkit-border-radius: 0 25px 25px 0;
+  -moz-border-radius: 0 25px 25px 0;
+  -ms-border-radius: 0 25px 25px 0;
+  -o-border-radius: 0 25px 25px 0;
+}
+/* ------------------------------------------- */
+
+
+/* ---------------/ VIDEOGAMES /-------------- */
+/* ------------------------------------------- */

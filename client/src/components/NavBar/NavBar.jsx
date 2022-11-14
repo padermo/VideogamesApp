@@ -7,8 +7,8 @@ function NavBar() {
     <div className='container-navbar'>
       <div className='container-interno-navbar'>
         <div className="links-menu">
-          <Link to={'/'} className='links'><label htmlFor="">Games</label></Link>
-          <Link to={'/create-videogames'} className='links'><label htmlFor="">Create</label></Link>
+          <Link to={'/'} className='links'><label className='lbl'>Games</label></Link>
+          <Link to={'/create-videogames'} className='links'><label className='lbl'>Create</label></Link>
         </div>
         <div className="searchbar">
           <SearchBar />

@@ -5,7 +5,12 @@ function Header() {
   return (
     <div className='container-header'>
       <div className="container-interno-header">
-        <NavBar/>
+        <div className="header-img">
+          
+        </div>
+        <div className="container-header-navbar">
+          <NavBar/>
+        </div>
       </div>
     </div>
   )

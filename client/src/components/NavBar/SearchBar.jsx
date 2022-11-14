@@ -33,8 +33,8 @@ function SearchBar() {
   return (
     <div className='container-searchbar'>
       <div className='border-searchbar'>
-        <input type="text" placeholder='Videogame...' onChange={onChange} value={input} />
-        <button onClick={sendValueInput}>Search</button>
+        <input className='input-search' type="text" placeholder='Videogame...' onChange={onChange} value={input} />
+        <button className='btn-search' onClick={sendValueInput}>Search</button>
       </div>
     </div>
   )
