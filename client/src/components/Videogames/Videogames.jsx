@@ -197,10 +197,11 @@ function Videogames() {
       <div className="container-interno-videogames">
         <div className="container-options-videogames">
           <div className="btn-page-videogames">
-            <Btn onClick={next} name={"Next"} />
-            <label>Page: {currentPage + 1}</label>
             <Btn onClick={prev} name={"Prev"} />
+            <label>Page: {currentPage + 1}</label>
+            <Btn onClick={next} name={"Next"} />
           </div>
+
           <div className="options-filter-videogames">
             <select onChange={selectSort}>
               <option value="#">Seleccione filtro</option>
